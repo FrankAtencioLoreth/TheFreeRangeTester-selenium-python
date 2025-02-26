@@ -1,0 +1,13 @@
+1. Install Python
+2. Open console
+   2.1. Create a virtual environment: python -m venv environment-name
+3. Install libraries:
+   pip install selenium pytest webdriver-manager
+4. Run all test
+    4.1. Open terminal
+    4.2. Select an environment: src_route\TestEnv\Scripts\activate.bat (windows)
+    4.3. Type: pytest
+5. Run an specific test by filename
+   5.1 pytest "route\test_example.py"
+6. Run an specific test by tagname
+   6.1 pytest -m tagname
