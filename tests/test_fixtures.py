@@ -17,6 +17,7 @@ def browser():
   yield driver
   driver.quit()
 
+@pytest.mark.regression #tagname
 def test_google_search(browser, search_by_term):
   search_box = browser.find_element("name", "q")
   search_box.send_keys(search_by_term + Keys.ENTER)
