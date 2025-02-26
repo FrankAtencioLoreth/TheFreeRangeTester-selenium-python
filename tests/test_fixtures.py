@@ -42,7 +42,7 @@ def browser():
 @pytest.mark.regression #tagname
 def test_google_search(browser, search_by_term):
   """
-  Test that do search by terms and check if exist results
+  Test that do search by terms and check if exist resultsse
   """
   search_box = browser.find_element("name", "q")
   search_box.send_keys(search_by_term + Keys.ENTER)
