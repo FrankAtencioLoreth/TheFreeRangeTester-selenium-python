@@ -1,5 +1,6 @@
 import pytest
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
@@ -11,5 +12,5 @@ def test_validate_equal_text(driver):
         expect_text = "example"
 
         assert element.text == expect_text
-    except NoSuchElementExeption:
+    except NoSuchElementException:
         assert False, "Could not find the element with the supplied locator"
