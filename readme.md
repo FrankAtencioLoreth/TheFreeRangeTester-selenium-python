@@ -50,7 +50,7 @@ This repository contains automated tests using Selenium with Python, following t
    - On Windows:
 
      ```bash
-     .\env\Scriptsctivate
+     .\env\Scripts\activate
      ```
 
    - On macOS/Linux:
