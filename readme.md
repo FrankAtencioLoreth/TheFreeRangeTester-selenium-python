@@ -68,7 +68,7 @@ This repository contains automated tests using Selenium with Python, following t
    If `requirements.txt` is not provided, manually install the dependencies:
 
    ```bash
-   pip install selenium pytest
+   pip install selenium pytest allure-pytest
    ```
 
 ## Project Structure
