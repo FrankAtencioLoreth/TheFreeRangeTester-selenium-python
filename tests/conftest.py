@@ -1,7 +1,6 @@
-from email.policy import default
-
 import pytest
 from selenium import webdriver
+from allure_commons.types import AttachmentType
 from selenium.webdriver.edge.service import Service as EdgeService
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
@@ -21,14 +20,13 @@ def pytest_addoption(parser) -> None:
         help="Type of browser: chrome, firefox, edge"
     )
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def browser(request) -> any:
     """
     Browser configuration
     """
-    browser_name = request.config.getoption("--browser").lower()
-    driver = None
 
+    browser_name = request.config.getoption("--browser").lower()
     # select a browser agree to match with the parameter --browser given via command line
     if browser_name == "chrome":
         chrome_options = webdriver.ChromeOptions()
@@ -48,6 +46,7 @@ def browser(request) -> any:
     driver.maximize_window()
     yield driver
     driver.quit()
+
 
 @pytest.fixture
 def sandbox_page(browser: any) -> SandBoxPage:
