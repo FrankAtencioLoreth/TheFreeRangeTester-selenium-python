@@ -107,7 +107,7 @@ TheFreeRangeTester-selenium-python/
    - On Windows:
 
      ```bash
-     .\env\Scriptsctivate
+     .\env\Scripts\activate
      ```
 
    - On macOS/Linux:
