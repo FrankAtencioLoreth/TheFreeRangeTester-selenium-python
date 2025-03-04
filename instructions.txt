@@ -11,3 +11,6 @@
    5.1 pytest "route\test_example.py"
 6. Run an specific test by tagname
    6.1 pytest -m tagname
+ 7. Run pytest using parallel tests
+    7.1 pip install pytest-xdist
+    7.2 pytest test_name.py -n <number of workers>
