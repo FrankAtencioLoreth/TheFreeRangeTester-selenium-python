@@ -143,7 +143,7 @@ def test_modal_title(sandbox_page: pytest.fixture) -> None:
 
 @pytest.mark.sandbox
 @pytest.mark.regression
-@pytest.mark.table
+@pytest.mark.dynamic_table
 def test_dynamic_table(sandbox_page: pytest.fixture) -> None:
     """
     Test that validate a dynamic table
@@ -180,4 +180,3 @@ def test_static_table(sandbox_page: pytest.fixture) -> None:
     assert (
         before_value == after_value
     ), f"The before value: {before_value} and after value: {after_value} is not same"
-

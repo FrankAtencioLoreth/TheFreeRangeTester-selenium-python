@@ -18,38 +18,37 @@ def pytest_addoption(parser) -> None:
         "--browser",
         action="store",
         default="chrome",
-        help="Browser run tests on"
+        help="Type of browser: chrome, firefox, edge"
     )
 
 @pytest.fixture
-def browser(request) -> webdriver:
+def browser(request) -> any:
     """
     Browser configuration
     """
-    browser_name = request.config.option.browser
+    browser_name = request.config.getoption("--browser").lower()
     driver = None
 
     # select a browser agree to match with the parameter --browser given via command line
-    match browser_name.lower():
-       case "chrome":
-           chrome_options = webdriver.ChromeOptions()
-           chrome_options.add_argument("--incognito")
-           driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
-       case "firefox":
-           firefox_options =Options()
-           firefox_options.set_preference("browser.privatebrowsing.autostart", True)
-           driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=firefox_options)
-       case "edge":
-           edge_options = webdriver.EdgeOptions()
-           edge_options.add_argument("-inprivate")
-           driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
-       case _, None:
-           print(f"Executing with a default browser {browser_name}")
+    if browser_name == "chrome":
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("--incognito")
+        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+    elif browser_name == "firefox":
+        firefox_options =Options()
+        firefox_options.set_preference("browser.privatebrowsing.autostart", True)
+        driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=firefox_options)
+    elif browser_name == "edge":
+        edge_options = webdriver.EdgeOptions()
+        edge_options.add_argument("-inprivate")
+        driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()), options=edge_options)
+    else:
+        raise ValueError(f"Browser {browser_name} not supported")
 
     driver.maximize_window()
     yield driver
     driver.quit()
 
 @pytest.fixture
-def sandbox_page(browser: pytest.fixture()) -> SandBoxPage:
+def sandbox_page(browser: any) -> SandBoxPage:
     return SandBoxPage(browser)
